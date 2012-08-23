@@ -3,6 +3,7 @@ package mx.com.sampozaicer.games.framework.core;
 import java.awt.Container;
 import java.awt.Graphics;
 
+import mx.com.sampozaicer.games.framework.controls.GameKeyboardManager;
 import mx.com.sampozaicer.games.framework.screen.GameScreenManager;
 
 public abstract class GameCore {
@@ -10,9 +11,16 @@ public abstract class GameCore {
 	protected boolean running;
 	protected Container gameContainer;
 	protected GameScreenManager gsm;
+	protected GameKeyboardManager gkm;
+	protected long totalTime;
+	private long timePassed;
+	private long accumTime;
 	
 	public GameCore(Container c) {
 		this.gameContainer = c;
+		if(c instanceof GameContainer) {
+			gkm = ((GameContainer)c).getKeyboardManager();
+		}
 	}
 	
 	/*
@@ -44,9 +52,12 @@ public abstract class GameCore {
 	 * Contain the game's main loop
 	 */
 	protected void gameLoop() {
-		long accumTime = System.currentTimeMillis();
+		totalTime = 0;
+		accumTime = System.currentTimeMillis();
+		
 		while(running) {
-			long timePassed = System.currentTimeMillis() - accumTime;
+			timePassed = System.currentTimeMillis() - accumTime;
+			totalTime += timePassed;
 			accumTime += timePassed;
 			
 			update(timePassed); //Update Game's state
@@ -58,7 +69,7 @@ public abstract class GameCore {
 			gsm.updateGameCanvas(); //Show rendered objects
 			
 			try {
-				Thread.sleep(20);
+				Thread.sleep(15);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}

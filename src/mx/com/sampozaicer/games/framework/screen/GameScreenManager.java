@@ -18,8 +18,8 @@ public class GameScreenManager {
 		canvas = new GameCanvas();
 		canvas.setIgnoreRepaint(true);
 		canvas.setSize(c.getSize());
-		canvas.setBackground(Color.WHITE);
-		canvas.setForeground(Color.GREEN);
+		canvas.setBackground(Color.BLUE);
+		canvas.setForeground(Color.BLACK);
 		
 		c.add(canvas);
 		c.setVisible(true);
@@ -49,6 +49,14 @@ public class GameScreenManager {
 				Toolkit.getDefaultToolkit().sync();
 			}
 		}
+	}
+	
+	public int getWidth() {
+		return canvas.getWidth();
+	}
+	
+	public int getHeight() {
+		return canvas.getHeight();
 	}
 
 }
