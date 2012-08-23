@@ -18,9 +18,8 @@ public abstract class GameCore {
 	
 	public GameCore(Container c) {
 		this.gameContainer = c;
-		if(c instanceof GameContainer) {
-			gkm = ((GameContainer)c).getKeyboardManager();
-		}
+		gkm = new GameKeyboardManager();
+		c.addKeyListener(gkm);
 	}
 	
 	/*
