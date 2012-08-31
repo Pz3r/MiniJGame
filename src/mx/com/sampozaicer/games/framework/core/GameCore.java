@@ -62,7 +62,7 @@ public abstract class GameCore {
 			update(timePassed); //Update Game's state
 			
 			Graphics g = gsm.getGraphics();
-			render(g); //Render game's objects
+			render(g); //Render game's objects to the canvas
 			g.dispose();
 			
 			gsm.updateGameCanvas(); //Show rendered objects
